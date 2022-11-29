@@ -29,7 +29,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       this.mensajes.push( msg );
 
-      // Ejecuta un scroll automático despues de 50ms para darle tiempo al mensaje de que arribe.
       setTimeout(() => {
         this.elemento.scrollTop = this.elemento.scrollHeight;
       }, 50);

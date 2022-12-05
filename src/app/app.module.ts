@@ -1,36 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 
-// sockets
+// Sockets
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
-  url: environment.wsUrl , options: {}
-};
+  url: environment.apiURL,
+  options: {}
+}
 
-
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-import { FooterComponent } from './components/footer/footer.component';
-import { ChatComponent } from './components/chat/chat.component';
-import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ChatComponent } from './componentes/chat/chat.component';
+import { FooterComponent } from './componentes/footer/footer.component';
+import { UsuariosConectadosComponent } from './componentes/usuarios-conectados/usuarios-conectados.component';
 import { MensajesComponent } from './pages/mensajes/mensajes.component';
-
-
-
-
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    ChatComponent,
-    ListaUsuariosComponent,
     LoginComponent,
+    ChatComponent,
+    FooterComponent,
+    UsuariosConectadosComponent,
     MensajesComponent
   ],
   imports: [

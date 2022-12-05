@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from '../../services/websocket.service';
 import { Router } from '@angular/router';
+
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-login',
@@ -8,29 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   nombre = '';
 
-
   constructor(
-    public wsService: WebsocketService,
+    public chatService: ChatService,
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-
 
   ingresar() {
-
-    this.wsService.loginWS( this.nombre )
-      .then( () => {
-
-        this.router.navigateByUrl('/mensajes');
-
-      });
-
+    this.chatService.login(this.nombre)
+        .then(() => {
+          this.router.navigateByUrl('/mensajes');
+        });
   }
-
 
 }

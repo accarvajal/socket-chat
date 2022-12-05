@@ -10,31 +10,44 @@ export class ChatService {
     public wsService: WebsocketService
   ) { }
 
-    sendMessage( mensaje: string ) {
+  emitActiveUsers() {
+    this.wsService.emit('consultar-usuarios');
+  }
 
-      const payload = {
-        de: this.wsService.getUsuario().nombre,
-        cuerpo: mensaje
-      };
+  getActiveUser() {
+    return this.wsService.getUsuario();
+  }
 
-      this.wsService.emit( 'mensaje' , payload );
+  getActiveUsers() {
+    return this.wsService.listen('usuarios-activos');
+  }
+  
+  getChannelStatus() {
+    return this.wsService.socketStatus;
+  }
 
+  getPrivateMessages() {
+    return this.wsService.listen('mensaje-privado');
+  }
+
+  getPublicMessages() {
+    return this.wsService.listen('mensaje-publico');
+  }
+
+  login(usuario: string) {
+    return this.wsService.login(usuario);
+  }
+
+  logout() {
+    this.wsService.logout();
+  }
+
+  sendMessage(mensaje: string) {
+    const payload = {
+      origin: this.wsService.getUsuario().nombre,
+      body: mensaje
     }
 
-    getMessages() {
-      return this.wsService.listen( 'mensaje-nuevo' );
-    }
-
-    getMessagesPrivate() {
-      return this.wsService.listen( 'mensaje-privado' );
-    }
-
-    getUsuariosActivos() {
-      return this.wsService.listen( 'usuarios-activos' );
-    }
-
-    emitirUsuariosActivos() {
-      this.wsService.emit( 'obtener-usuarios');
-    }
-
+    this.wsService.emit('mensaje', payload);
+  }
 }
